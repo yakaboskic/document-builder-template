@@ -16,19 +16,7 @@ wheels = [
 ]
 
 [[package]]
-name = "latex-builder"
-version = "0.1.0"
-source = { git = "https://github.com/yakaboskic/latex-builder.git?rev=main#da2c03d7f52445a33dc2b55bb0f5bfeacba1abc6" }
-dependencies = [
-    { name = "coolname" },
-    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "numpy", version = "2.4.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "pillow" },
-    { name = "pyyaml" },
-]
-
-[[package]]
-name = "my-paper"
+name = "document-builder-template"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
@@ -37,6 +25,18 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "latex-builder", git = "https://github.com/yakaboskic/latex-builder.git?rev=main" }]
+
+[[package]]
+name = "latex-builder"
+version = "0.1.0"
+source = { git = "https://github.com/yakaboskic/latex-builder.git?rev=main#7defe6063223db883d9af28e0cb784750e6d11ef" }
+dependencies = [
+    { name = "coolname" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.4.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "pillow" },
+    { name = "pyyaml" },
+]
 
 [[package]]
 name = "numpy"

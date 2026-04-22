@@ -5,7 +5,7 @@ anything complex — figures, tables, multi-line equations.
 
 ## Math
 
-Inline math like $\prob(x \mid \theta)$ uses the `\prob` macro
+Inline math like $\text{Pr}(x \mid \theta)$ uses the `\prob` macro
 defined in `templates/article.tex`. The `latex-builder preview` command
 auto-expands such macros inside math when it emits the markdown-preview
 blocks, so GitHub's KaTeX renders them too.
@@ -24,6 +24,10 @@ Or, for fuller control, wrap in a ```latex block:
 \end{equation}
 ```
 
+<!-- latex-builder:preview:begin hash=390b9e1e -->
+$$ \Pr(d \mid \mathcal{D}) = \frac{\Pr(\mathcal{D} \mid d)\,\Pr(d)}{\Pr(\mathcal{D})} $$
+<!-- latex-builder:preview:end -->
+
 Reference it with Equation \ref{eq:bayes}.
 
 ## Figures
@@ -35,10 +39,14 @@ Reference manifest-declared figures with `{{fig:id}}`:
     \centering
     {{fig:example}}
     \caption{Framework overview. Replace this image with your own by dropping
-    a file into \texttt{src/<ver>/figures/example/example.png} (or .pdf, .html, .svg).}
+    a file into \texttt{src/VERSION/figures/example/example.png} (or .pdf, .html, .svg).}
     \label{fig:example}
 \end{figure}
 ```
+
+<!-- latex-builder:preview:begin hash=f4735a99 -->
+![Framework overview. Replace this image with your own by dropping a file into src/VERSION/figures/example/example.png (or .pdf, .html, .svg).](../figures/example/example.svg)
+<!-- latex-builder:preview:end -->
 
 Or, for figures you won't reference from other places, inline an image:
 
@@ -79,5 +87,9 @@ B     & 456   & 78.9 \\
 \end{tabular}
 \end{table}
 ```
+
+<!-- latex-builder:preview:begin hash=e302bf19 -->
+*(table — Example complex table.)*
+<!-- latex-builder:preview:end -->
 
 Reference the table above: Table \ref{tab:example}.

@@ -42,7 +42,7 @@ preview:
 preview-check:
 	uv run latex-builder preview --check $(if $(VERSION),--version $(VERSION))
 
-html:
+html: preview
 	uv run latex-builder html $(if $(VERSION),--version $(VERSION))
 
 serve: html
