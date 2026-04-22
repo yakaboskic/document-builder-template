@@ -65,6 +65,13 @@ builds (CI).
    approximations so the doc renders meaningfully on GitHub, VSCode,
    Obsidian, and Cursor.
 
+   > **Figures missing from `make html` output?** `make html` depends
+   > on `make preview` in this Makefile, so a fresh clone renders
+   > correctly. If you invoke `latex-builder html` directly (bypassing
+   > make) and figures declared inside ```latex blocks don't appear,
+   > run `make preview` first — those fences are PDF-only; HTML picks
+   > up figures from the markdown-preview blocks written beside them.
+
 3. **Before committing**, optionally verify previews are up-to-date:
    ```bash
    make preview-check
