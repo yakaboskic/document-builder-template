@@ -1,4 +1,4 @@
-.PHONY: help install install-pinned update build pdf preview preview-check html word serve clean
+.PHONY: help install install-pinned update latex build pdf preview preview-check html word serve clean
 
 VERSION ?=
 
@@ -8,7 +8,7 @@ help:
 	@echo "                 the venv. Use this by default — document-sanity changes often."
 	@echo "  install-pinned Install strictly from uv.lock (no upgrade). Reproducible / CI."
 	@echo "  update         Alias for 'install' — re-resolve document-sanity to GitHub HEAD."
-	@echo "  build          Generate LaTeX artifacts in out/<version>/latex/"
+	@echo "  latex          Generate LaTeX artifacts in out/<version>/latex/ (no PDF compile)"
 	@echo "  pdf            Build + compile to PDF (out/<version>/pdf/main.pdf)"
 	@echo "  preview        Insert/refresh markdown-preview blocks in docs/"
 	@echo "  preview-check  Fail if preview blocks are missing or stale (CI)"
@@ -31,8 +31,11 @@ update:
 install-pinned:
 	uv sync
 
-build:
+latex:
 	uv run document-sanity build $(if $(VERSION),--version $(VERSION))
+
+# Deprecated alias for `latex`. Kept so existing scripts keep working.
+build: latex
 
 pdf:
 	uv run document-sanity build --compile $(if $(VERSION),--version $(VERSION))
@@ -51,6 +54,7 @@ word: preview
 
 serve: html
 	@ver=$${VERSION:-$$(ls -1 out | grep -E '^[0-9]{8}' | sort -r | head -1)}; \
+	if [ -z "$$ver" ]; then ver=$$(ls -1 out | head -1); fi; \
 	echo "Serving out/$$ver/html/ at http://localhost:8000"; \
 	python3 -m http.server --directory out/$$ver/html 8000
 

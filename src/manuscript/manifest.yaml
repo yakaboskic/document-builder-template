@@ -3,7 +3,7 @@
 # figures, and tables.
 
 metadata:
-  title: "A Starter Manuscript Built with latex-builder"
+  title: "A Starter Manuscript Built with document-sanity"
   authors:
     - name: "First Author"
       email: "first.author@example.edu"
@@ -20,11 +20,16 @@ metadata:
       institution: "Partner Institute"
   abstract: |
     We analyzed {{NUM_SAMPLES:,}} samples and found a significant effect
-    ($p = {{PVAL:.2e}}$, R\textsuperscript{2} = {{R2:.2f}}). This abstract
+    ($p = {{PVAL:.2e}}$, R<sup>2</sup> = {{R2:.2f}}). This abstract
     demonstrates the \{\{VARIABLE\}\} token substitution syntax; see the
     sections for more examples.
-  keywords: [example, template, markdown, latex-builder]
+  keywords: [example, template, markdown, document-sanity]
   template: article            # loads templates/article.tex
+  word_template: article       # loads templates/article.docx (header, footer, watermark, styles)
+  word_styles: article         # loads styles/article.yaml (overrides extracted)
+  html_styles: article         # loads styles/article.css (after the inline <style>)
+  # render: true               # set to false for proposals etc. — skips the
+                               # auto-rendered title/authors/abstract block.
 
 # Order in which sections render. Pseudo-sections:
 #   _bibliography → inserts \bibliography{references} at this position
@@ -72,10 +77,33 @@ variables:
 figures:
   example:
     width: "\\textwidth"
-    # `source` is an optional explicit fallback — the builder will also
-    # auto-scan figures/example/ and pick the best match per target.
-    source: figures/example/example.png
+    # No explicit `source:` — the builder auto-scans figures/example/ and
+    # picks the best file per target (pdf prefers .png, html prefers .html
+    # then .svg, word prefers raster, etc.).
 
-# Tables declared here are copied to the output. You can also inline
-# tables inside ```latex blocks directly in the markdown docs.
-tables: {}
+# Tables: two ways to handle them.
+#
+# 1. Inline markdown pipe tables in your .md docs — best for small,
+#    presentation-only tables that don't need a separate data source.
+#
+# 2. Declare here with `source:` pointing at a file in tables/, and
+#    reference from markdown with `{{tab:<id>}}`. The token expands to
+#    a markdown pipe table at build time so PDF, HTML, and Word all
+#    render identically. Single source of truth — re-run an analysis,
+#    overwrite the .csv, rebuild.
+#
+# Supported formats:
+#   csv       comma-separated; converted to a pipe table on load
+#   tsv       tab-separated; converted to a pipe table on load
+#   markdown  the source file is already a pipe table; inlined verbatim
+#   latex     raw .tex tabular fragment; reference via \input{tables/...}
+#             inside a ```latex block (no token expansion)
+tables:
+  subgroup_summary:
+    source: tables/subgroup_summary.csv
+    format: csv
+    provenance:
+      description: Effect size by subgroup, generated alongside the primary test.
+      source: data/analysis_results.parquet
+      command: python scripts/subgroup_summary.py --out tables/subgroup_summary.csv
+      updated: "2026-04-21"

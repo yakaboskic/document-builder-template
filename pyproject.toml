@@ -1,7 +1,7 @@
 [project]
-# TEMPLATE: rename `document-builder-template` to your paper's slug after
+# TEMPLATE: rename `document-sanity-template` to your paper's slug after
 # clicking "Use this template" on GitHub.
-name = "document-builder-template"
+name = "document-sanity-template"
 version = "0.1.0"
 description = "Manuscript built with document-sanity."
 readme = "README.md"

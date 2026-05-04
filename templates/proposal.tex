@@ -1,16 +1,17 @@
-% document-sanity article template
-% Insertion points are marked with %%DOCUMENT_SANITY: comments — the builder
-% substitutes title/authors/abstract/content/bibliography on build.
+% document-sanity proposal template
+% Sibling of article.tex tuned for proposal-style documents (SBIR/STTR,
+% NIH/NSF, internal whitepapers, etc.) where:
+%   - the author hand-numbers sections like "1.0 Introduction",
+%     "2.1 Aims", and we don't want LaTeX to add its own counter on top
+%   - there's typically no auto-rendered title block (manifest sets
+%     metadata.render: false)
+%   - bib is conventionally inline footnoted or in a References section
 %
-% Replace this file (or add siblings like `nature.tex`) for a different
-% journal style; `manifest.metadata.template: <name>` in manifest.yaml
-% selects which file is used.
+% Selected by `manifest.metadata.template: proposal`. Word side reuses
+% the article.docx unless a proposal.docx is added.
 
 \documentclass[11pt, a4paper]{article}
 
-% T1 + lmodern: stop the default OT1 encoding from rendering '<' and '>'
-% as inverted Spanish punctuation (¡ ¿) in text mode. Also gives proper
-% accented-character glyphs and copyable PDF text.
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -37,9 +38,12 @@
 \usepackage{natbib}
 \bibliographystyle{plainnat}
 
-%% Example custom math macro — define your own here.
-%% `document-sanity preview` will expand \prob to \text{Pr} inside $...$ math
-%% so GitHub's KaTeX preview renders correctly without the custom command.
+% Suppress section auto-numbering. Authors hand-write numbers like
+% "1.0 Introduction" / "2.1 Aims" in markdown headings; LaTeX would
+% otherwise prefix its own counter ("1 1.0 Introduction") and produce
+% a double-numbered mess.
+\setcounter{secnumdepth}{-1}
+
 \newcommand{\prob}{\text{Pr}}
 
 %%DOCUMENT_SANITY:PACKAGES

@@ -6,7 +6,7 @@ anything complex — figures, tables, multi-line equations.
 ## Math
 
 Inline math like $\text{Pr}(x \mid \theta)$ uses the `\prob` macro
-defined in `templates/article.tex`. The `latex-builder preview` command
+defined in `templates/article.tex`. The `document-sanity preview` command
 auto-expands such macros inside math when it emits the markdown-preview
 blocks, so GitHub's KaTeX renders them too.
 
@@ -24,15 +24,15 @@ Or, for fuller control, wrap in a ```latex block:
 \end{equation}
 ```
 
-<!-- latex-builder:preview:begin hash=390b9e1e -->
+<!-- document-sanity:preview:begin hash=390b9e1e -->
 $$ \Pr(d \mid \mathcal{D}) = \frac{\Pr(\mathcal{D} \mid d)\,\Pr(d)}{\Pr(\mathcal{D})} $$
-<!-- latex-builder:preview:end -->
+<!-- document-sanity:preview:end -->
 
 Reference it with Equation \ref{eq:bayes}.
 
 ## Figures
 
-Reference manifest-declared figures with `{{fig:id}}`:
+Reference manifest-declared figures with `{{fig:example}}`:
 
 ```latex
 \begin{figure}[h!]
@@ -44,9 +44,9 @@ Reference manifest-declared figures with `{{fig:id}}`:
 \end{figure}
 ```
 
-<!-- latex-builder:preview:begin hash=f4735a99 -->
-![Framework overview. Replace this image with your own by dropping a file into src/VERSION/figures/example/example.png (or .pdf, .html, .svg).](../figures/example/example.svg)
-<!-- latex-builder:preview:end -->
+<!-- document-sanity:preview:begin hash=f4735a99 -->
+![Framework overview. Replace this image with your own by dropping a file into src/VERSION/figures/example/example.png (or .pdf, .html, .svg).](../figures/example/example.png)
+<!-- document-sanity:preview:end -->
 
 Or, for figures you won't reference from other places, inline an image:
 
@@ -54,7 +54,7 @@ Or, for figures you won't reference from other places, inline an image:
 ![Example caption.](../figures/example/example.png)
 ```
 
-See [docs/figures.md](https://github.com/yakaboskic/latex-builder/blob/main/docs/figures.md)
+See [docs/figures.md](https://github.com/yakaboskic/document-sanity/blob/main/docs/figures.md)
 for the full figure layout conventions.
 
 ## Tables
@@ -69,8 +69,8 @@ Simple tables — write them in native markdown:
 The builder converts these to `\begin{tabular}` for LaTeX and
 `<table class="md-table">` for HTML.
 
-Complex tables (multi-column headers, `\cmidrule`, subtables) go in
-```latex blocks:
+Complex tables (multi-column headers, `\cmidrule`, subtables) belong in a
+fenced LaTeX block:
 
 ```latex
 \begin{table}[h]
@@ -88,8 +88,8 @@ B     & 456   & 78.9 \\
 \end{table}
 ```
 
-<!-- latex-builder:preview:begin hash=e302bf19 -->
+<!-- document-sanity:preview:begin hash=e302bf19 -->
 *(table — Example complex table.)*
-<!-- latex-builder:preview:end -->
+<!-- document-sanity:preview:end -->
 
 Reference the table above: Table \ref{tab:example}.

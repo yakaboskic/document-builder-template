@@ -1,11 +1,11 @@
 # Introduction <!-- \label{sec:introduction} -->
 
-Welcome to the `latex-builder` starter template. This paragraph
+Welcome to the `document-sanity` starter template. This paragraph
 demonstrates **bold**, *italic*, `inline code`, and inline math:
 $E = mc^2$.
 
 Variable substitution happens at build time — we have
-{{NUM_SAMPLES:,}} samples in total, achieving an overall R\textsuperscript{2}
+{{NUM_SAMPLES:,}} samples in total, achieving an overall R<sup>2</sup>
 of {{R2:.2f}} ($p = {{PVAL:.2e}}$). In the HTML viewer, clicking those
 values pops up their provenance (source files, command, updated date)
 because the manifest declares a `provenance:` block for them.
@@ -28,6 +28,6 @@ Lists work as you'd expect:
 
 ## Numbered steps
 
-1. Install `latex-builder` (see [README](../../../README.md)).
+1. Install `document-sanity` (see [README](../../../README.md)).
 2. Edit this file or add new sections.
 3. Run `make html` to preview, `make pdf` to export.
